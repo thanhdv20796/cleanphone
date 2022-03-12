@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.cleanphone.data.Resource
 import com.example.cleanphone.data.Status
 import com.example.cleanphone.databinding.FragmentBatterySaverBinding
-import com.example.cleanphone.domain.model.BatteryStatus
+import com.example.cleanphone.data.model.local.BatteryStatus
 import com.google.android.material.snackbar.Snackbar
 import com.ymo.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint

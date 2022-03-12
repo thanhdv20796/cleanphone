@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanphone.R
-import com.example.cleanphone.domain.model.BatteryStatus
+import com.example.cleanphone.data.model.local.BatteryStatus
 import kotlinx.android.synthetic.main.item_battery_consumption_fragment.view.*
 
 class BatterySaverAdapter(private val batteryStatusItems: List<BatteryStatus>) :
@@ -19,7 +19,7 @@ class BatterySaverAdapter(private val batteryStatusItems: List<BatteryStatus>) :
     }
 
     override fun onBindViewHolder(holder: BatteryStatusListViewHolder, position: Int) {
-        holder.bindView(batteryStatusItems.get(position))
+        holder.bindView(batteryStatusItems[position])
     }
 
     override fun getItemCount(): Int {

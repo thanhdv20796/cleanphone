@@ -7,11 +7,10 @@ import android.os.BatteryManager
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.cleanphone.data.db.AppDatabase
-import com.example.cleanphone.domain.model.BatteryHealthType
-import com.example.cleanphone.domain.model.BatteryPowerSourceType
-import com.example.cleanphone.domain.model.BatteryStatus
-import com.example.cleanphone.domain.model.BatteryStatusType
+import com.example.cleanphone.data.model.local.BatteryHealthType
+import com.example.cleanphone.data.model.local.BatteryPowerSourceType
+import com.example.cleanphone.data.model.local.BatteryStatus
+import com.example.cleanphone.data.model.local.BatteryStatusType
 import com.google.gson.Gson
 import kotlinx.coroutines.coroutineScope
 import java.util.*
