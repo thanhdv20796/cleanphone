@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CleanPhone</string>
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Setting</string>
+    <string name="title_dashboard_tool">Tools</string>
+
+    <!--    Error-->
+    <string name="bad_request">Bad Request</string>
+    <string name="unauthorized_user">Unauthorised User</string>
+    <string name="internal_server_error">Internal Server Error</string>
+    <string name="connecting_server_error">Error Occur While Connecting Server</string>
+    <string name="no_data">No Results.\n Try pulling to refresh</string>
+    <string name="search_error">there is no such recipe name</string>
+    <string name="no_internet">Please check your internet connection</string>
+    <string name="network_error">You are currently offline.</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >4 characters</string>
+    <string name="invalid_username_and_password">please check your username and password</string>
+
+</resources>
