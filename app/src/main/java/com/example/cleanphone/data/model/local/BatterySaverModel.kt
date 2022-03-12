@@ -1,15 +1,17 @@
 package com.example.cleanphone.data.model.local
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import com.example.cleanphone.data.db.Converters
+import com.example.cleanphone.data.db.battery.Converters
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 
+@Parcelize
 @Entity(tableName = "BatteryStatus")
 @TypeConverters(Converters::class)
 data class BatteryStatus(
@@ -60,7 +62,7 @@ data class BatteryStatus(
 
     @field:SerializedName("remaining_energy_nanowattHour")
     val remainingEnergyNanowattHour: Long
-)
+):Parcelable
 
 enum class BatteryHealthType(val value: Int) {
 

@@ -1,4 +1,4 @@
-package com.example.cleanphone.data.db
+package com.example.cleanphone.data.db.battery
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

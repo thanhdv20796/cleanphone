@@ -1,4 +1,4 @@
-package com.example.cleanphone.data.db
+package com.example.cleanphone.data.db.battery
 import androidx.room.TypeConverter
 import com.example.cleanphone.data.model.local.BatteryHealthType
 import com.example.cleanphone.data.model.local.BatteryPowerSourceType
