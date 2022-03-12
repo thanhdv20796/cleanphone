@@ -19,7 +19,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): DBHelper {
-        val appDatabase = Room.databaseBuilder(context, AppDatabase::class.java, context.packageName)
+        val appDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "cleanphone")
             .allowMainThreadQueries()
             .build()
         return DBHelperImpl(appDatabase)

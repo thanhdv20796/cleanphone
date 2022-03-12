@@ -1,8 +1,8 @@
 package com.example.cleanphone.data.db
 import androidx.room.TypeConverter
-import com.example.cleanphone.domain.model.BatteryHealthType
-import com.example.cleanphone.domain.model.BatteryPowerSourceType
-import com.example.cleanphone.domain.model.BatteryStatusType
+import com.example.cleanphone.data.model.local.BatteryHealthType
+import com.example.cleanphone.data.model.local.BatteryPowerSourceType
+import com.example.cleanphone.data.model.local.BatteryStatusType
 import java.util.*
 
 class Converters {

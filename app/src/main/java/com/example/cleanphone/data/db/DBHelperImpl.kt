@@ -1,8 +1,6 @@
 package com.example.cleanphone.data.db
 
-import androidx.lifecycle.LiveData
-import com.example.cleanphone.data.db.DBHelper
-import com.example.cleanphone.domain.model.BatteryStatus
+import com.example.cleanphone.data.model.local.BatteryStatus
 import javax.inject.Inject
 
 class DBHelperImpl @Inject constructor(
