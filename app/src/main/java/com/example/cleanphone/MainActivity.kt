@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        setUpToolbar()
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navHostFragment: NavHostFragment =
@@ -60,13 +59,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.main_nav_host_fragment).navigateUp(appbarConfiguration)
-    }
-
-    private fun setUpToolbar() {
-        setupActionBarWithNavController(
-            findNavController(R.id.main_nav_host_fragment),
-            appbarConfiguration
-        )
     }
 
 
