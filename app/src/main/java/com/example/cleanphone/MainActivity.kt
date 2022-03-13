@@ -3,10 +3,12 @@ package com.example.cleanphone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -15,28 +17,30 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.cleanphone.databinding.MainActivityBinding
 import com.example.cleanphone.lib.BatteryUsageWorker
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.main_activity.*
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: MainActivityBinding
-    private lateinit var navController: NavController
+
+    private val appbarConfiguration = AppBarConfiguration.Builder()
+        .setFallbackOnNavigateUpListener {
+            finish()
+            super.onSupportNavigateUp()
+        }
+        .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = MainActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-//        supportActionBar?.hide()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(false);
-        supportActionBar?.setHomeButtonEnabled(false);
-
-        val navView = binding.navView
+        setContentView(R.layout.main_activity)
+        setUpToolbar()
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navHostFragment: NavHostFragment =
             supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
+        val navController = navHostFragment.navController
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -47,18 +51,27 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        setupBatteryUsageWorker(ExistingPeriodicWorkPolicy.KEEP)
+        setupBatteryUsageWorker(ExistingPeriodicWorkPolicy.REPLACE)
+    }
+
+    fun navView(isVisible: Boolean) {
+        nav_view.isVisible = isVisible
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = navController
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return findNavController(R.id.main_nav_host_fragment).navigateUp(appbarConfiguration)
+    }
+
+    private fun setUpToolbar() {
+        setupActionBarWithNavController(
+            findNavController(R.id.main_nav_host_fragment),
+            appbarConfiguration
+        )
     }
 
 
-
     private fun resetServiceClick() {
-        setupBatteryUsageWorker(ExistingPeriodicWorkPolicy.REPLACE)
+        setupBatteryUsageWorker(ExistingPeriodicWorkPolicy.KEEP)
     }
 
     private fun setupBatteryUsageWorker(existingPeriodicWorkPolicy: ExistingPeriodicWorkPolicy) {

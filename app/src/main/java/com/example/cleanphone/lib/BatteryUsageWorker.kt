@@ -7,6 +7,7 @@ import android.os.BatteryManager
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.example.cleanphone.data.db.AppDatabase
 import com.example.cleanphone.data.model.local.BatteryHealthType
 import com.example.cleanphone.data.model.local.BatteryPowerSourceType
 import com.example.cleanphone.data.model.local.BatteryStatus
@@ -59,11 +60,11 @@ class BatteryUsageWorker(context: Context, params: WorkerParameters) :
             remainingEnergyNanowattHour = manager.getLongProperty(BatteryManager.BATTERY_PROPERTY_ENERGY_COUNTER),
         )
 
-//        val id = AppDatabase.getInstance(applicationContext).batteryDao().insert(bStatus)
-//        if(id <= 0) {
-//            Log.wtf(TAG, "Persisting error")
-//            Result.retry()
-//        }
+        val id = AppDatabase.getInstance(applicationContext).batteryDao().insert(bStatus)
+        if(id <= 0) {
+            Log.wtf(TAG, "Persisting error")
+            Result.retry()
+        }
         Log.wtf(TAG, Gson().toJson(bStatus))
         Result.success()
     }
