@@ -11,7 +11,7 @@ import com.example.cleanphone.data.Status
 import com.example.cleanphone.databinding.FragmentBatterySaverBinding
 import com.example.cleanphone.data.model.local.BatteryStatus
 import com.google.android.material.snackbar.Snackbar
-import com.ymo.utils.showSnackbar
+import com.example.cleanphone.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_battery_saver.*
 

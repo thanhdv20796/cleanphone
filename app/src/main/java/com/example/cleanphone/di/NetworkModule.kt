@@ -5,7 +5,7 @@ import com.example.cleanphone.BuildConfig
 import com.example.cleanphone.data.remote.ApiHelper
 import com.example.cleanphone.data.remote.ApiHelperImpl
 import com.example.cleanphone.data.remote.service.ApiService
-import com.ymo.utils.networkInfo
+import com.example.cleanphone.utils.networkInfo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

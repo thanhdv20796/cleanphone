@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.cleanphone.databinding.FragmentHomeBinding
 import com.example.cleanphone.databinding.FragmentSettingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingFragment: Fragment() {
     private var _binding: FragmentSettingBinding? = null
 

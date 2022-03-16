@@ -21,10 +21,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_activity.*
 import java.util.concurrent.TimeUnit
+import android.content.Intent
+
+import android.content.IntentFilter
+
+import android.R.string.no
+import com.example.cleanphone.lib.PowerChangingReceiver
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var receiver: PowerChangingReceiver;
     private val appbarConfiguration = AppBarConfiguration.Builder()
         .setFallbackOnNavigateUpListener {
             finish()
@@ -51,8 +58,18 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         setupBatteryUsageWorker(ExistingPeriodicWorkPolicy.REPLACE)
+
+        receiver = PowerChangingReceiver()
+        val ifilter = IntentFilter()
+        ifilter.addAction(Intent.ACTION_POWER_CONNECTED)
+        ifilter.addAction(Intent.ACTION_POWER_DISCONNECTED)
+        registerReceiver(receiver, ifilter)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+    }
     fun navView(isVisible: Boolean) {
         nav_view.isVisible = isVisible
     }
@@ -60,6 +77,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.main_nav_host_fragment).navigateUp(appbarConfiguration)
     }
+
 
 
     private fun resetServiceClick() {

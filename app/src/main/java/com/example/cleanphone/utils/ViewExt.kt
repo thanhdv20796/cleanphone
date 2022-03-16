@@ -1,4 +1,4 @@
-package com.ymo.utils
+package com.example.cleanphone.utils
 
 import android.app.Service
 import android.content.Context

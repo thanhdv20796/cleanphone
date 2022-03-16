@@ -10,7 +10,9 @@ import androidx.navigation.findNavController
 import com.example.cleanphone.databinding.FragmentHomeBinding
 import com.example.cleanphone.databinding.FragmentToolsBinding
 import com.example.cleanphone.ui.home.presentation.HomeFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ToolsFragment: Fragment() {
     private var _binding: FragmentToolsBinding? = null
 
