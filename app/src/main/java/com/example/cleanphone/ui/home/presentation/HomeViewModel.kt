@@ -14,45 +14,21 @@ import com.example.cleanphone.ui.base.BaseViewModel
 import com.example.cleanphone.ui.battery.data.BatterySaverRepositoryImp
 import com.example.cleanphone.ui.battery.data.CpuInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import android.content.Context.ACTIVITY_SERVICE
-
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.cleanphone.data.Resource
-import com.example.cleanphone.data.model.local.BatteryStatus
-import com.example.cleanphone.lib.BatteryUsageWorker
 import retrofit2.HttpException
 import java.io.*
 import java.util.regex.Pattern
 import javax.inject.Inject
-import android.os.SystemClock
-
-import android.content.Context.ACTIVITY_SERVICE
-import android.os.Debug
 import android.os.Process
+import dagger.hilt.android.qualifiers.ApplicationContext
 
-import androidx.core.content.ContextCompat.getSystemService
-import android.content.Context.ACTIVITY_SERVICE
-import android.text.format.Formatter
-
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.getSystemService
-import android.content.Context.ACTIVITY_SERVICE
 import java.util.*
-import android.graphics.drawable.Drawable
-import android.content.pm.PackageInfo
 import java.io.File
-import android.content.Context.ACTIVITY_SERVICE
-import androidx.core.content.ContextCompat.getSystemService
-import com.example.cleanphone.utils.RamUtils
 
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val repository: BatterySaverRepositoryImp
 ) : BaseViewModel() {
     private val removePackage = MutableLiveData<Resource<String>>()
@@ -70,7 +46,7 @@ class HomeViewModel @Inject constructor(
 
         val availMemory = memInfo.availMem
 
-        val usedMemory = totalMemory-availMemory
+        val usedMemory = totalMemory - availMemory
 
         return availMemory
     }
@@ -84,7 +60,7 @@ class HomeViewModel @Inject constructor(
         return totalMemory
     }
 
-    fun getUsageMemory(): Long{
+    fun getUsageMemory(): Long {
         val actManager = context.getSystemService(ACTIVITY_SERVICE) as ActivityManager
         val memInfo = ActivityManager.MemoryInfo()
         actManager.getMemoryInfo(memInfo)
@@ -92,7 +68,7 @@ class HomeViewModel @Inject constructor(
 
         val availMemory = memInfo.availMem
 
-        val usedMemory = totalMemory-availMemory
+        val usedMemory = totalMemory - availMemory
 
         return usedMemory
     }
@@ -100,6 +76,7 @@ class HomeViewModel @Inject constructor(
     fun clearAllAppRunBackground() {
         viewModelScope.launch {
             try {
+                val am = context.getSystemService(ACTIVITY_SERVICE) as ActivityManager
 
                 val pm = context.packageManager.getInstalledApplications(0)
                 //get a list of installed apps.
@@ -110,7 +87,7 @@ class HomeViewModel @Inject constructor(
                     Log.v("Hello", "kill process " + runningProcess.uid)
                     Log.v("Hello", "kill process " + runningProcess.processName)
                     Log.v("Free memory ", "-> " + Runtime.getRuntime().freeMemory());
-                    am?.killBackgroundProcesses(runningProcess.processName)
+                    am.killBackgroundProcesses(runningProcess.processName)
                     removePackage.postValue(Resource.success(runningProcess.processName))
                 }
             } catch (e: HttpException) {
@@ -162,7 +139,8 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getCurrentFreq(coreNumber: Int): Long {
-        val currentFreqPath = "${CpuInfoRepository.CPU_INFO_DIR}cpu$coreNumber/cpufreq/scaling_cur_freq"
+        val currentFreqPath =
+            "${CpuInfoRepository.CPU_INFO_DIR}cpu$coreNumber/cpufreq/scaling_cur_freq"
         return try {
             RandomAccessFile(currentFreqPath, "r").use { it.readLine().toLong() / 1000 }
         } catch (e: Exception) {
@@ -171,9 +149,8 @@ class HomeViewModel @Inject constructor(
     }
 
     fun cpuTemperature(): Float {
-        val process: Process
         return try {
-            process = Runtime.getRuntime().exec("cat sys/class/thermal/thermal_zone0/temp")
+            val process = Runtime.getRuntime().exec("cat sys/class/thermal/thermal_zone0/temp")
             process.waitFor()
             val reader = BufferedReader(InputStreamReader(process.inputStream))
             val line = reader.readLine()

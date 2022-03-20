@@ -38,22 +38,22 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         binding.imgBtnSpeedUpPhone.setOnClickListener {
-            viewModel.clearAllAppRunBackground()
-            val MB = 1024*1024
-            val freeMem = viewModel.getAvailableMemory()/MB
-            val totalMem = viewModel.getTotalMemory()/MB
-            val usedMem = viewModel.getUsageMemory()/MB
-
-            var StringRet = ""
-            val numCores = viewModel.getNumberOfCores()
-            StringRet += "CPU temperature\n"
-            val cpuTemp = viewModel.cpuTemperature()
-            StringRet += cpuTemp.toString() + "\n"
-            StringRet += "CPU frequences\n"
-            for(i in 0..numCores-1){
-                val currentFreq = viewModel.getCurrentFreq(i)
-                StringRet += "Core ${i}: ${currentFreq}\n"
-            }
+//            viewModel.clearAllAppRunBackground()
+//            val MB = 1024*1024
+//            val freeMem = viewModel.getAvailableMemory()/MB
+//            val totalMem = viewModel.getTotalMemory()/MB
+//            val usedMem = viewModel.getUsageMemory()/MB
+//
+//            var StringRet = ""
+//            val numCores = viewModel.getNumberOfCores()
+//            StringRet += "CPU temperature\n"
+//            val cpuTemp = viewModel.cpuTemperature()
+//            StringRet += cpuTemp.toString() + "\n"
+//            StringRet += "CPU frequences\n"
+//            for(i in 0..numCores-1){
+//                val currentFreq = viewModel.getCurrentFreq(i)
+//                StringRet += "Core ${i}: ${currentFreq}\n"
+//            }
             val action = HomeFragmentDirections.actionHomeToRamUsageFragment()
             it.findNavController().navigate(action);
 
