@@ -33,13 +33,13 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         binding.imgBtnSpeedUpPhone.setOnClickListener {
-            viewModel.clearAllAppRunBackground()
-            binding.txtTotalRam.text = "Tổng Ram: " + viewModel.getAllRam().toString()
+            val action = HomeFragmentDirections.actionHomeToRamUsageFragment()
+            it.findNavController().navigate(action);
 
         }
 
         binding.imgBtnBatterySaver.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeToBatteryFragment();
+            val action = HomeFragmentDirections.actionHomeToBatteryFragments()
             it.findNavController().navigate(action);
         }
 
@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
         binding.imgBtnSecurity.setOnClickListener {
 
         }
-        binding.txtTotalRam.text = "Tổng Ram: " + viewModel.getAllRam().toString()
         return root
     }
 

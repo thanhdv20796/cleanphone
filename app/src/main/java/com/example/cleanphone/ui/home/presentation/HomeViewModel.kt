@@ -25,55 +25,49 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cleanphone.data.Resource
 import com.example.cleanphone.data.model.local.BatteryStatus
+import com.example.cleanphone.lib.BatteryUsageWorker
 import retrofit2.HttpException
+import android.os.SystemClock
+
+import android.content.Context.ACTIVITY_SERVICE
+import android.os.Debug
+import android.os.Process
+
+import androidx.core.content.ContextCompat.getSystemService
+import android.content.Context.ACTIVITY_SERVICE
+import android.text.format.Formatter
+
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.getSystemService
+import android.content.Context.ACTIVITY_SERVICE
+import java.util.*
+import android.graphics.drawable.Drawable
+import android.content.pm.PackageInfo
+import java.io.File
+import android.content.Context.ACTIVITY_SERVICE
+import androidx.core.content.ContextCompat.getSystemService
+import com.example.cleanphone.utils.RamUtils
+
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    @ApplicationContext val context: Context,
     private val repository: BatterySaverRepositoryImp
 ) : BaseViewModel() {
     private val removePackage = MutableLiveData<Resource<String>>()
     val listHistoryBatteryCharging: LiveData<Resource<String>> get() = removePackage
 
 
-    fun getAllRam(): Long {
-        return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-    }
-
     fun clearAllAppRunBackground() {
         viewModelScope.launch {
             try {
-                val am = context.getSystemService(ACTIVITY_SERVICE) as ActivityManager?
 
-                val pm = context.packageManager.getInstalledApplications(0)
-                //get a list of installed apps.
-                val addString: List<String>
-                for (runningProcess in pm) {
-                    if (runningProcess.flags and ApplicationInfo.FLAG_SYSTEM == 1) continue
-                    if (runningProcess.packageName == context.packageName) continue
-                    Log.v("Hello", "kill process " + runningProcess.uid)
-                    Log.v("Hello", "kill process " + runningProcess.processName)
-                    am?.killBackgroundProcesses(runningProcess.processName)
-                    removePackage.postValue(Resource.success(runningProcess.processName))
-                }
             } catch (e: HttpException) {
-                removePackage.postValue(
-                    Resource.error(
-                        "Null Data",
-                        null
-                    )
-                )
             } catch (e: Exception) {
-                removePackage.postValue(
-                    Resource.error(
-                        e.localizedMessage ?: e.message!!,
-                        null
-                    )
-                )
             }
 
         }
 
-
     }
+
 }
+

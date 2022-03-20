@@ -14,4 +14,5 @@ abstract class DataModule {
     @Binds
     @Singleton
     abstract fun provideDataRepository(dataRepositoryImpl: BatterySaverRepositoryImp): BatterySaverRepositoryHelper
+
 }

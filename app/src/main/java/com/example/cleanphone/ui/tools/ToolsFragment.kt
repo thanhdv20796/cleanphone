@@ -31,7 +31,7 @@ class ToolsFragment: Fragment() {
         }
 
         binding.imgBtnBatterySaver.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeToBatteryFragment();
+            val action = HomeFragmentDirections.actionHomeToBatteryFragments();
             it.findNavController().navigate(action);
         }
 

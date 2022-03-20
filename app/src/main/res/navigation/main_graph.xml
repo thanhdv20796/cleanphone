@@ -11,9 +11,15 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_home_to_batteryFragment"
+            android:id="@+id/action_home_to_batteryFragments"
             app:destination="@id/navigationBatterySaver"
             app:popUpTo="@+id/navigationBatterySaver"
+            />
+
+        <action
+            android:id="@+id/action_home_to_ramUsageFragment"
+            app:destination="@id/navigationRamUsage"
+            app:popUpTo="@+id/navigationRamUsage"
             />
 
     </fragment>
@@ -30,6 +36,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigationRamUsage"
+        android:name="com.example.cleanphone.ui.cleanram.presentation.CleanRamFragment"
+        tools:layout="@layout/fragment_usage_ram" />
+
+
+    <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.cleanphone.ui.setting.SettingFragment"
         android:label="@string/title_notifications"
@@ -37,6 +49,7 @@
 
     <fragment
         android:id="@+id/navigationBatterySaver"
+        android:label="@string/battery_save"
         android:name="com.example.cleanphone.ui.battery.presentation.BatterySaverFragment"
         tools:layout="@layout/fragment_battery_saver">
         <action

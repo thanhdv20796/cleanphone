@@ -73,18 +73,5 @@
                 android:text="CPU cooler" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_progress"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/txtTotalRam"
-                android:text="aa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

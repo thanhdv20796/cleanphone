@@ -18,6 +18,6 @@ class BatterySaverRepositoryImp @Inject constructor(
 ) : BatterySaverRepositoryHelper {
 
     override suspend fun getAllHistoryBattery(): List<BatteryStatus> =
-        dbHelper.getAllHistoryBattery();
+        dbHelper.getAllHistoryBattery()
 
 }
